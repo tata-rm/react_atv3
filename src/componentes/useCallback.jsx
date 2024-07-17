@@ -1,19 +1,28 @@
 import React, {useState, useCallback} from 'react';
 
-function Tarefas() {
-  const botao = useRef(null);
+function ListaTarefas() {
+  const [tarefas, setTarefas] = useState([]);
+  const [tarefa, setTarefa] = useState('');
 
-  const limparEntrada = () => {
-    botao.current.value = '';
-    botao.current.focus();
-  };
+  const addTarefa = useCallback(() => {
+    if (tarefa.trim() !== '') {
+      setTarefas((prevTasks) => [...prevTasks, tarefa]);
+      setTarefa('');
+    }
+  }, [tarefa]);
 
   return (
     <div className="App">
-      <p id='p'>Entrada</p>
-      <input type="text" ref={botao}/>
-      <button onClick={limparEntrada} id="but">Limpar</button>        
+      <p id='p'>To-do List</p>
+      <input type="text" value={tarefa} placeholder="Adicionar tarefa" onChange={(e) => setTarefa(e.target.value)} />
+      <button className='but' onClick={addTarefa}>Adicionar</button>
+      <ul>
+        {tarefas.map((t, index) => (
+          <li key={index}>{t}</li>
+        ))}
+      </ul>
     </div>
   );
 }
-export default Tarefas;
+
+export default ListaTarefas;

@@ -11,7 +11,7 @@ function Entrada() {
   return (
     <div className="App">
       <p id='p'>Entrada</p>
-      <input type="text" ref={botao}/>
+      <input type="text" ref={botao} placeholder='Adicione um texto'/>
       <button onClick={limparEntrada} id="but">Limpar</button>        
     </div>
   );
